@@ -4,11 +4,20 @@
 ![Proxmox](https://img.shields.io/badge/Hypervisor-Proxmox_VE-orange?style=for-the-badge&logo=proxmox&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-v1.0_Learning_Phase-blue?style=for-the-badge)
 
+![Blueprint](img/blueprint.png)
 
 Dokumentacja mojego domowego laboratorium opartego na dwóch niezależnych jednostkach Mini-PC. Projekt jest poligonem doświadczalnym dla technologii wirtualizacji, konteneryzacji oraz administracji systemami Windows/Linux.
 
 ---
-### Cel i geneza
+## 🏗️ Infrastruktura Sprzętowa
+Poniżej 
+| Host | Model | CPU | RAM | Rola |
+| :--- | :--- | :--- | :--- | :--- |
+| **PVE-Loki** | HP ProDesk 400 G5 | 6C/6T | 8GB | Najważniejsze usługi i magazyn danych |
+| **PVE-Hel** | HP EliteDesk 800 G2 | 4C/4T | 32GB | Windows Lab i testowanie |
+
+---
+### 🎯 Cel i geneza
 Celem projektu i to dlaczego w ogóle to zacząłem robić jest nauka i zgłębianie mojego zainteresowania. Równie ważnym powodem dla mnie jest przekonanie że w obecnych czasach dominuje model subskrypcyjny na praktycznie każde usługi w internecie czy dostęp do mediów co skutkuje tym że nie posiadamy niczego na wyłączność. Innym powodem jest zadbanie o prywatność i zabezpieczeniu swoich danych.
 
 ---
@@ -16,25 +25,17 @@ Celem projektu i to dlaczego w ogóle to zacząłem robić jest nauka i zgłębi
 ## 📊 Stan obecny: v1.0
 Obecnie lab znajduje się w fazie intensywnego wdrażania usług. Priorytetem jest **dostępność (uptime)** i **funkcjonalność**. 
 
-- ### ✅ Zrobione
+- ### ✅ Ukończone
 	- Instalacja i konfiguracja Proxmox na obu maszynach
-	- Uruchomienie wybranych usług na kontenerach LXC
-	- Przygotowanie bezpiecznego środowiska do nauki Windows Serwer
-	- Zdalny dostęp
-	- Lokalny DNS i blokowanie reklam
- - ### 🛠️ W trakcie
+	- Uruchomienie wybranych usług na kontenerach LXC i Docker
+	- Przygotowanie bezpiecznego, izolowanego środowiska (VLAN) dla Windows Serwer
+	- Zdalny dostęp (Tailscale)
+	- Lokalny DNS i blokowanie reklam (Pi-hole)
+ - ### 🛠️ Zadania w toku
 	- Dokumentacja obecnej topologii i konfiguracji usług
- - ### 📊 Do zrobienia
-   - Strona domowa homelaba
+ - ### 📊 Kolejne kroki
+   - Wdrożenie stroney domowej (Homepage)
    - Rozbudowa głownego serwera i migracja usług
----
-## 🏗️ Infrastruktura Sprzętowa
-
-| Host | Model | CPU | RAM | Rola |
-| :--- | :--- | :--- | :--- | :--- |
-| **PVE-Loki** | HP ProDesk 400 G5 | 6C/6T | 8GB | Najważniejsze usługi i magazyn danych |
-| **PVE-Hel** | HP EliteDesk 800 G2 | 4C/4T | 32GB | Windows Lab i testowanie |
-
 ---
 
 ## 🛠️ Stos Technologiczny i Usługi
@@ -52,7 +53,7 @@ W pełni odizolowane środowisko do nauki administracji systemami Microsoft.
 
 ### 🌐 Sieć i przepływ ruchu
 Zarządzanie ruchem w sieci, bezpieczeństwo i usprawnienie użytkowania
-* **Reverse Proxy (Nginx Proxy Manager):** Obsługuje certyfikaty SSL i kieruje ruch do odpowiednich usług bez wystawiania ich bezpośrednich portów.
+* **Reverse Proxy (Nginx Proxy Manager):** Obsługuje certyfikaty SSL i kieruje ruch do odpowiednich usług.
 * **Pihole:** Lokalny serwer DNS, blokuje reklamy dla urządzeń z niego korzystających 
 * **VLAN:** Separacja ruchu laboratorium Windows od reszty sieci, co zwiększa bezpieczeństwo sieci domowej.
 * **Tailscale** Bezpieczny dostęp do usług z poza sieci domowej
@@ -97,3 +98,11 @@ graph TD
   - Klucze SSH zamiast haseł
   - Migracja usług z kontenerów z użytkownikiem root na dedykowanych użytkowników
   - Kopie zapasowe
+
+# 🎞️ Zrzuty ekranu
+![Homepage](img/homepage.png)
+![PVE-Hel](img/hel_homepage.png)
+![Pi-hole](img/pihole_homepage.png)
+![Nginx Proxy Manager](img/nginx_homepage.png)
+![Jellyfin](img/jellyfin_titlepage.png)
+![Sonarr](img/sonarr.png)
