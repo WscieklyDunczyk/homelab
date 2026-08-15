@@ -11,7 +11,7 @@ Dokumentacja mojego domowego laboratorium opartego na dwóch niezależnych jedno
 Celem projektu i to dlaczego w ogóle to zacząłem robić jest nauka i zgłębianie mojego zainteresowania. Równie ważnym powodem dla mnie jest przekonanie że w obecnych czasach dominuje model subskrypcyjny na praktycznie każde usługi w internecie czy dostęp do mediów co skutkuje tym że nie posiadamy niczego na wyłączność. Innym powodem jest zadbanie o prywatność i zabezpieczeniu swoich danych.
 
 ## 🖥️ Specyfikacja
-| Host | Rola | CPU | RAM |a
+| Host | Rola | CPU | RAM |
 | :--- | :--- | :--- | :--- |
 | **Mimir** | Główny serwer | i5-11400 | 16GB |
 | **Hel** | Środowisko testowe i Windows Serwer | i5-6500T | 32GB |
@@ -33,7 +33,7 @@ Każda usługa (grupa usług jeżeli są powiązane ze sobą) żyje w osobnym ko
 Sieć domowa: `192.168.1.0/24`. Kontenery LXC  dostają statyczne adresy w kolejności wdrażania:
 
 | Host/LXC | Adres IP |
-|---|---|---|
+|---|---|
 | Host proxmox(mimir) | `192.168.1.20` |
 | LXC pihole | `192.168.1.21` |
 | LXC media | `192.168.1.22` |
