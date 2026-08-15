@@ -7,6 +7,16 @@
 Dokumentacja mojego domowego laboratorium opartego na dwóch niezależnych jednostkach PC. Projekt jest poligonem doświadczalnym dla technologii wirtualizacji, konteneryzacji oraz administracji systemami Windows/Linux.
 
 ---
+## 📑 Spis treści
+
+- [🎯 Cel i geneza](#-cel-i-geneza)
+- [🖥️ Specyfikacja](#-specyfikacja)
+- [🏗️ Architektura usług](#-architektura-usług)
+- [🗂️ Szablony usług Docker](#-szablony-usług-docker)
+- [🌐 Adresacja IP](#-adresacja-ip)
+- [🔗 Dostęp zdalny (Tailscale)](#-dostęp-zdalny-tailscale)
+- [🎞️ Zrzuty ekranu](#-zrzuty-ekranu)
+
 ### 🎯 Cel i geneza
 Celem projektu i to dlaczego w ogóle to zacząłem robić jest nauka i zgłębianie mojego zainteresowania. Równie ważnym powodem dla mnie jest przekonanie że w obecnych czasach dominuje model subskrypcyjny na praktycznie każde usługi w internecie czy dostęp do mediów co skutkuje tym że nie posiadamy niczego na wyłączność. Innym powodem jest zadbanie o prywatność i zabezpieczeniu swoich danych.
 
@@ -20,9 +30,9 @@ Celem projektu i to dlaczego w ogóle to zacząłem robić jest nauka i zgłębi
 
 Każda usługa (grupa usług jeżeli są powiązane ze sobą) żyje w osobnym kontenerze LXC lub maszynie wirtualnej na wirtualnym środowisku Proxmox (PVE):
 
-1. **LXC "pihole"** – Pi-hole, lokalny serwer DNS + blokowanie reklam.
-2. **LXC "monitoring"** – Uptime Kuma (monirorowanie kontenerów LXC i samego serwera Proxmox).
-3. **LXC "media"** – Jellyfin + Gluetun + Transmission + Prowlarr + Sonarr + Radarr, wszystko razem w jednym kontenerze
+1. **LXC "pihole"** – Pi-hole, lokalny serwer DNS + blokowanie reklam. [instrukcja](pihole/README.md)
+2. **LXC "monitoring"** – Uptime Kuma (monitorowanie kontenerów LXC i samego serwera Proxmox). [instrukcja](monitoring/README.md)
+3. **LXC "media"** – Jellyfin + Gluetun + Transmission + Prowlarr + Sonarr + Radarr, wszystko razem w jednym kontenerze.  [instrukcja](media/README.md)
 4. **VM windows server i VM windows 10** - Dwie osobne ale powiązane ze sobą wirtualne maszyny odseparowane od reszty sieci w osobnym VLAN
 5. **LXC samba** - Prosty kontener, którego zadaniem jest serwowanie plików przez sieć
 6. **LXC homepage** - Pulpit nawigacyjny homelaba, zawiera odnośniki do każdej usługi

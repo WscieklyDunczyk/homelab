@@ -26,7 +26,7 @@ Jeżeli nie ma katalogów i mamy pusty dysk:
    chown -R 1000:1000 /mnt/storage
    chmod -R 750 /mnt/storage
 ```
-Media serwer potrzebuje dostępu do karty graicznej (dedykowanej lub zintegrowanej) do transkodowania filmów.
+Media serwer potrzebuje dostępu do karty graficznej (dedykowanej lub zintegrowanej) do transkodowania filmów.
 **GPU passthrough (QSV)** — tak jak TUN wyżej. Przez **>_ Shell** hosta: `nano /etc/pve/lxc/<IVMID>.conf` (`ls -la /dev/dri` w kontenerze pokazuje faktyczne GID-y właściciela urządzeń — zweryfikuj, mogą się różnić na innym sprzęcie):
    ```
    lxc.cgroup2.devices.allow: c 226:0 rwm

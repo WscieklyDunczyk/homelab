@@ -6,7 +6,7 @@ Tworzymy katalogi
 ```
 Przesyłam plik docker-compose.yml do kontenera LXC z naszego komputera 
 ```bash
-    scp docker-compose.yml <użytkownik_kontenera_LXC>@<ADRES_IP_KONTENERA>:/opt/docker-compose/monitoring/
+    scp docker-compose.yml <użytkownik_kontenera_LXC>@<IP_KONTENERA>:/opt/docker-compose/monitoring/
 ```
 ```bash
     cd /opt/docker-compose/monitoring && docker compose up -d

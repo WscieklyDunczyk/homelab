@@ -11,7 +11,7 @@ Dla KAŻDEJ roli (pihole, media, monitoring) tworzę osobny, kontener LXC i inst
 - Template `debian-12-standard`
 - IPv4/CIDR: `192.168.1.<x>/24`,
 - Gateway: `192.168.1.1`
-> Po utworzeniu w właściowściach zaznaczamy jeszcze `Nesting` i `Keyctl` (wymagane do działania Docker)
+> Po utworzeniu w właściwościach zaznaczamy jeszcze `Nesting` i `Keyctl` (wymagane do działania Docker)
 ---
 ## Instalacja Dockera (w kontenerze)
 Prosta komenda
