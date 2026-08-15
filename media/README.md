@@ -12,15 +12,15 @@ Każdy katalog zawiera odpowiadające mu media, a folder transmission jest katal
 - Zaznacz kontener → **Resources** → **Add** →
 - **Mount Point** → `Disk/directory` → `Path: /mnt/storage` (gdzie zostanie podpięty dysk w kontenerze)
 → **Add**. Kontener się zrestartuje automatycznie po dodaniu.
+> [!IMPORTANT]
+> Uwaga: jeśli dysk nie pojawia się na liście wyboru w tym oknie (GUI
+> zrób to przez **>_ Shell** hosta zamiast GUI:
+> ```bash
+> pct set 102 -mp0 /dev/sda1,mp=/mnt/storage
+> pct reboot 102
+> ```
 
-   > Uwaga: jeśli dysk nie pojawia się na liście wyboru w tym oknie (GUI
-   > zrób to przez **>_ Shell** hosta zamiast GUI:
-   > ```bash
-   > pct set 102 -mp0 /dev/sda1,mp=/mnt/storage
-   > pct reboot 102
-   > ```
-
-Jeżeli nie mam katalogów i mamy pusty dysk:
+Jeżeli nie ma katalogów i mamy pusty dysk:
 ```bash
    mkdir -p /mnt/storage/{movies,shows,anime,transmission}
    chown -R 1000:1000 /mnt/storage
@@ -41,6 +41,7 @@ Media serwer potrzebuje dostępu do karty graicznej (dedykowanej lub zintegrowan
    lxc.idmap: g 994 100994 64542
    ```
 Zapisz i reset kontenera
+---
 Dodajemy katalogi dla poszczególnych usług
 ```bash
    mkdir -p /opt/appdata/{gluetun,transmission,prowlarr,sonarr,radarr,jellyfin,jellyfin/custom-cont-init.d} /opt/docker-compose/media

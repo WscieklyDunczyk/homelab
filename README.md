@@ -62,6 +62,5 @@ Tailscale zainstalowany osobno w każdym LXC. Dostęp do nich mają tylko urząd
 ![Homepage](img/homepage.png)
 ![PVE-Hel](img/hel_homepage.png)
 ![Pi-hole](img/pihole_homepage.png)
-![Nginx Proxy Manager](img/nginx_homepage.png)
 ![Jellyfin](img/jellyfin_titlepage.png)
 ![Sonarr](img/sonarr.png)

@@ -12,4 +12,3 @@ Przesyłam plik docker-compose.yml do kontenera LXC z naszego komputera
     cd /opt/docker-compose/monitoring && docker compose up -d
 ```
 Otwieramy w przeglądarce `http://<IP_KONTENERA>:3001` i zakładamy konto admina i konfigurujemy monitory naszych kontenerów/usług
----
