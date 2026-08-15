@@ -1,103 +1,54 @@
-# 🚀 Homelab
-> "From Functional Chaos to Enterprise Standards"
+
+# 📁 Homelab
 
 ![Proxmox](https://img.shields.io/badge/Hypervisor-Proxmox_VE-orange?style=for-the-badge&logo=proxmox&logoColor=white)
-![Status](https://img.shields.io/badge/Status-v1.0_Learning_Phase-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-v2.0_Learning_Phase-blue?style=for-the-badge)
 
-![Blueprint](img/blueprint.png)
-
-Dokumentacja mojego domowego laboratorium opartego na dwóch niezależnych jednostkach Mini-PC. Projekt jest poligonem doświadczalnym dla technologii wirtualizacji, konteneryzacji oraz administracji systemami Windows/Linux.
-
----
-## 🏗️ Infrastruktura Sprzętowa
-Poniżej 
-| Host | Model | CPU | RAM | Rola |
-| :--- | :--- | :--- | :--- | :--- |
-| **PVE-Loki** | HP ProDesk 400 G5 | 6C/6T | 8GB | Najważniejsze usługi i magazyn danych |
-| **PVE-Hel** | HP EliteDesk 800 G2 | 4C/4T | 32GB | Windows Lab i testowanie |
+Dokumentacja mojego domowego laboratorium opartego na dwóch niezależnych jednostkach PC. Projekt jest poligonem doświadczalnym dla technologii wirtualizacji, konteneryzacji oraz administracji systemami Windows/Linux.
 
 ---
 ### 🎯 Cel i geneza
 Celem projektu i to dlaczego w ogóle to zacząłem robić jest nauka i zgłębianie mojego zainteresowania. Równie ważnym powodem dla mnie jest przekonanie że w obecnych czasach dominuje model subskrypcyjny na praktycznie każde usługi w internecie czy dostęp do mediów co skutkuje tym że nie posiadamy niczego na wyłączność. Innym powodem jest zadbanie o prywatność i zabezpieczeniu swoich danych.
 
----
+## 🖥️ Specyfikacja
+| Host | Rola | CPU | RAM |a
+| :--- | :--- | :--- | :--- |
+| **Mimir** | Główny serwer | i5-11400 | 16GB |
+| **Hel** | Środowisko testowe i Windows Serwer | i5-6500T | 32GB |
 
-## 📊 Stan obecny: v1.0
-Obecnie lab znajduje się w fazie intensywnego wdrażania usług. Priorytetem jest **dostępność (uptime)** i **funkcjonalność**. 
+## 🏗️ Architektura usług
 
-- ### ✅ Ukończone
-	- Instalacja i konfiguracja Proxmox na obu maszynach
-	- Uruchomienie wybranych usług na kontenerach LXC i Docker
-	- Przygotowanie bezpiecznego, izolowanego środowiska (VLAN) dla Windows Serwer
-	- Zdalny dostęp (Tailscale)
-	- Lokalny DNS i blokowanie reklam (Pi-hole)
- - ### 🛠️ Zadania w toku
-	- Dokumentacja obecnej topologii i konfiguracji usług
- - ### 📊 Kolejne kroki
-   - Wdrożenie stroney domowej (Homepage)
-   - Rozbudowa głownego serwera i migracja usług
----
+Każda usługa (grupa usług jeżeli są powiązane ze sobą) żyje w osobnym kontenerze LXC lub maszynie wirtualnej na wirtualnym środowisku Proxmox (PVE):
 
-## 🛠️ Stos Technologiczny i Usługi
+1. **LXC "pihole"** – Pi-hole, lokalny serwer DNS + blokowanie reklam.
+2. **LXC "monitoring"** – Uptime Kuma (monirorowanie kontenerów LXC i samego serwera Proxmox).
+3. **LXC "media"** – Jellyfin + Gluetun + Transmission + Prowlarr + Sonarr + Radarr, wszystko razem w jednym kontenerze
+4. **VM windows server i VM windows 10** - Dwie osobne ale powiązane ze sobą wirtualne maszyny odseparowane od reszty sieci w osobnym VLAN
+5. **LXC samba** - Prosty kontener, którego zadaniem jest serwowanie plików przez sieć
+6. **LXC homepage** - Pulpit nawigacyjny homelaba, zawiera odnośniki do każdej usługi
+7. **LXC hermesagent** - Kontener testujący lokalne modele językowe sztucznej inteligencji
 
-### 🎬 Media i dane
-Centralny punkt rozrywki i przechowywania danych, zarządzany głównie przez kontenery LXC i Docker.
-* **Jellyfin:** Prywatny serwer strumieniowania wideo.
-* **Samba Server:** Sieciowy magazyn plików (NAS) dla urządzeń domowych.
-* **"Arr" Stack:** Automatyzacja biblioteki mediów (Sonarr, Radarr, Prowlarr, Transmission, Gluetun).
+## 🌐 Adresacja IP
 
-### 🖥️ Windows Lab
-W pełni odizolowane środowisko do nauki administracji systemami Microsoft.
-* **Windows Server 2022:** Active Directory, DNS, DHCP, GPO Management.
-* **Windows Client:** Stacja robocza do testowania polityk domenowych.
+Sieć domowa: `192.168.1.0/24`. Kontenery LXC  dostają statyczne adresy w kolejności wdrażania:
 
-### 🌐 Sieć i przepływ ruchu
-Zarządzanie ruchem w sieci, bezpieczeństwo i usprawnienie użytkowania
-* **Reverse Proxy (Nginx Proxy Manager):** Obsługuje certyfikaty SSL i kieruje ruch do odpowiednich usług.
-* **Pihole:** Lokalny serwer DNS, blokuje reklamy dla urządzeń z niego korzystających 
-* **VLAN:** Separacja ruchu laboratorium Windows od reszty sieci, co zwiększa bezpieczeństwo sieci domowej.
-* **Tailscale** Bezpieczny dostęp do usług z poza sieci domowej
----
+| Host/LXC | Adres IP |
+|---|---|---|
+| Host proxmox(mimir) | `192.168.1.20` |
+| LXC pihole | `192.168.1.21` |
+| LXC media | `192.168.1.22` |
+| LXC monitoring | `192.168.1.23` |
+| Host proxmox(hel) | `192.168.1.30` |
+| VM windows server | `10.0.0.1` |
+| VM windows 10 | `10.0.0.2` |
+| LXC samba | `192.168.1.36` |
+| LXC homepage | `192.168.1.43` |
+| LXC hermesagent | `192.168.1.44` |
 
-## 🗺️ Schemat Architektury
+## 🔗 Dostęp zdalny (Tailscale)
 
-```mermaid
-graph TD
-    User((Użytkownik)) --> Pi[Pihole]
-    subgraph "PVE-Hel"
-        Pi --> NPM[Nginx]
-        NPM --> HP[Homepage]
-        NPM --> BS[Bookstack]
-        subgraph arr[Arr Stack - Docker]
-            gluetun[gluetun]
-            sonarr[sonarr] --> gluetun
-            lidarr[lidarr] --> gluetun
-            prowlarr[plowarr] --> gluetun
-            transmission[transmission] --> gluetun
-        end
-        NPM --> arr
-        arr --> SMB1[SMB share]
-        subgraph "VLAN 10 - Windows Lab"
-            WS[Windows Server AD]
-            WC[Windows Klient]
-            WS --- WC
-        end
-    end
-    subgraph "PVE-Loki"
-        NPM --> JF[Jellyfin]
-        JF[Jellyfin] --> SMB2[SMB share]
-    end
-    arr --> SMB2[SMB share]
-    VPN((VPN)) --> gluetun
-    gluetun --> VPN
-```
-# 🚀 v2.0
-  ### Plany na dalszy rozwój projektu
-  - Monitorowanie ruchu w sieci
-  - Powiadomienia o incydentach, które wymagają podjęcia działania
-  - Klucze SSH zamiast haseł
-  - Migracja usług z kontenerów z użytkownikiem root na dedykowanych użytkowników
-  - Kopie zapasowe
+Tailscale zainstalowany osobno w każdym LXC. Dostęp do nich mają tylko urządzenia znajdujące się w sieci Tailscale. Dzięki temu sieć domowa jest bezpieczna i nie potrzeba wystawiać żadnej usługi do internetu.
+
 
 # 🎞️ Zrzuty ekranu
 ![Homepage](img/homepage.png)
