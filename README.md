@@ -28,6 +28,14 @@ Każda usługa (grupa usług jeżeli są powiązane ze sobą) żyje w osobnym ko
 6. **LXC homepage** - Pulpit nawigacyjny homelaba, zawiera odnośniki do każdej usługi
 7. **LXC hermesagent** - Kontener testujący lokalne modele językowe sztucznej inteligencji
 
+## 🗂️ Szablony usług Docker
+
+1. `pihole/docker-compose.yml` – Pi-hole (DNS + blokowanie reklam).
+2. `monitoring/docker-compose.yml` – Uptime Kuma.
+3. `media/docker-compose.yml` – Gluetun + Transmission + Prowlarr + Sonarr + Radarr + Jellyfin.
+4. `media/.env.example` – Szablon zmiennych środowiskowych dla sieci VPN.
+
+
 ## 🌐 Adresacja IP
 
 Sieć domowa: `192.168.1.0/24`. Kontenery LXC  dostają statyczne adresy w kolejności wdrażania:

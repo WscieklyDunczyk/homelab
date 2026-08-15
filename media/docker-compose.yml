@@ -1,0 +1,112 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /opt/appdata/gluetun:/gluetun
+    environment:
+      - VPN_SERVICE_PROVIDER=${VPN_PROVIDER}
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${VPN_PRIVATE_KEY}
+      - WIREGUARD_ADDRESSES=${VPN_ADDRESS}
+      - TZ=Europe/Warsaw
+    ports:
+      - '9091:9091/tcp'
+      - '51413:51413/tcp'
+      - '51413:51413/udp'
+    restart: unless-stopped
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    network_mode: "service:gluetun"
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Warsaw
+    volumes:
+      - /opt/appdata/transmission:/config
+      - /mnt/storage:/data
+    restart: unless-stopped
+    depends_on:
+      gluetun:
+        condition: service_healthy
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Warsaw
+    volumes:
+      - /opt/appdata/prowlarr:/config
+    ports:
+      - '9696:9696'
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Warsaw
+    volumes:
+      - /opt/appdata/sonarr:/config
+      - /mnt/storage:/data
+    ports:
+      - '8989:8989'
+    restart: unless-stopped
+    depends_on:
+      - prowlarr
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Warsaw
+    volumes:
+      - /opt/appdata/radarr:/config
+      - /mnt/storage:/data
+    ports:
+      - '7878:7878'
+    restart: unless-stopped
+    depends_on:
+      - prowlarr
+
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Warsaw
+    volumes:
+      - /opt/appdata/jellyfin:/config
+      - /opt/appdata/jellyfin/custom-cont-init.d:/custom-cont-init.d:ro
+      - /mnt/storage:/data
+    ports:
+      - '8096:8096'
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
+    restart: unless-stopped
