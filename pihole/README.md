@@ -4,7 +4,7 @@ Program typu otwarto źródłowego (Open-source) blokuje reklamy i telemetrię n
 # 🚀 Konfiguracja
 
 ## Przygotowanie kontenera LXC (wspólne dla każdego kontenera)
-Dla KAŻDEJ roli (pihole, monitoring, media) tworzę osobny, kontener LXC i instaluje Dockera.
+Dla KAŻDEJ roli (pihole, media, monitoring) tworzę osobny, kontener LXC i instaluje Dockera.
 - Kontener **CT**
 - Hostname `<rola>`
 - `unprivileged container` - ✓
