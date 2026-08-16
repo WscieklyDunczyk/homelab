@@ -27,16 +27,15 @@ Dokumentacja mojego domowego laboratorium opartego na dwóch niezależnych jedno
 - [🗂️ Szablony usług Docker](#-szablony-usług-docker)
 - [🌐 Adresacja IP](#-adresacja-ip)
 - [🔗 Dostęp zdalny (Tailscale)](#-dostęp-zdalny-tailscale)
-- [🎞️ Zrzuty ekranu](#-zrzuty-ekranu)
-
-### 🎯 Cel i geneza
+- [🚧 Roadmap](#-roadmap)
+## 🎯 Cel i geneza
 Celem projektu i to dlaczego w ogóle to zacząłem robić jest nauka i zgłębianie mojego zainteresowania. Równie ważnym powodem dla mnie jest przekonanie że w obecnych czasach dominuje model subskrypcyjny na praktycznie każde usługi w internecie czy dostęp do mediów co skutkuje tym że nie posiadamy niczego na wyłączność. Innym powodem jest zadbanie o prywatność i zabezpieczeniu swoich danych.
 
 ## 🖥️ Specyfikacja
 | Host | Rola | CPU | RAM |
 | :--- | :--- | :--- | :--- |
 | **Mimir** | Główny serwer | i5-11400 | 16GB |
-| **Hel** | Środowisko testowe i Windows Serwer | i5-6500T | 32GB |
+| **Hel** | Środowisko testowe i Windows Server | i5-6500T | 32GB |
 
 ## 🏗️ Architektura usług
 
@@ -44,7 +43,7 @@ Każda usługa (grupa usług jeżeli są powiązane ze sobą) żyje w osobnym ko
 
 1. **LXC "pihole"** – Pi-hole, lokalny serwer DNS + blokowanie reklam. [instrukcja](pihole/README.md)
 2. **LXC "monitoring"** – Uptime Kuma (monitorowanie kontenerów LXC i samego serwera Proxmox). [instrukcja](monitoring/README.md)
-3. **LXC "media"** – Jellyfin + Gluetun + Transmission + Prowlarr + Sonarr + Radarr, wszystko razem w jednym kontenerze.  [instrukcja](media/README.md)
+3. **LXC "media"** – Jellyfin + Gluetun + Transmission + Prowlarr + Sonarr + Radarr, wszystko razem w jednym kontenerze. [instrukcja](media/README.md)
 4. **VM windows server i VM windows 10** - Dwie osobne ale powiązane ze sobą wirtualne maszyny odseparowane od reszty sieci w osobnym VLAN
 5. **LXC samba** - Prosty kontener, którego zadaniem jest serwowanie plików przez sieć
 6. **LXC homepage** - Pulpit nawigacyjny homelaba, zawiera odnośniki do każdej usługi
@@ -60,7 +59,7 @@ Każda usługa (grupa usług jeżeli są powiązane ze sobą) żyje w osobnym ko
 
 ## 🌐 Adresacja IP
 
-Sieć domowa: `192.168.1.0/24`. Kontenery LXC  dostają statyczne adresy w kolejności wdrażania:
+Sieć domowa: `192.168.1.0/24`. Kontenery LXC dostają statyczne adresy w kolejności wdrażania:
 
 | Host/LXC | Adres IP |
 |---|---|
@@ -78,3 +77,11 @@ Sieć domowa: `192.168.1.0/24`. Kontenery LXC  dostają statyczne adresy w kolej
 ## 🔗 Dostęp zdalny (Tailscale)
 
 Tailscale zainstalowany osobno w każdym LXC. Dostęp do nich mają tylko urządzenia znajdujące się w sieci Tailscale. Dzięki temu sieć domowa jest bezpieczna i nie potrzeba wystawiać żadnej usługi do internetu.
+
+## 🚧 Roadmap
+
+- [ ] Dokumentacja LXC samba
+- [ ] Dokumentacja LXC homepage
+- [ ] Dokumentacja LXC hermesagent
+- [ ] Opis konfiguracji VLAN dla maszyn Windows
+- [ ] Automatyzacja backupów kontenerów

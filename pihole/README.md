@@ -1,10 +1,10 @@
 # Pi-hole
 Program typu otwarto źródłowego (Open-source) blokuje reklamy i telemetrię na poziomie zapytania (DNS sinkhole) na każdym urządzeniu, które będzie korzystać z niego jako swojego serwera DNS komputery, telefony, a nawet telewizory. 
 
-# 🚀 Konfiguracja
+## 🚀 Konfiguracja
 
 ## Przygotowanie kontenera LXC (wspólne dla każdego kontenera)
-Dla KAŻDEJ roli (pihole, media, monitoring) tworzę osobny, kontener LXC i instaluje Dockera.
+Dla KAŻDEJ roli (pihole, media, monitoring) tworzę osobny kontener LXC i instaluje Dockera.
 - Kontener **CT**
 - Hostname `<rola>`
 - `unprivileged container` - ✓
@@ -33,11 +33,12 @@ Tailscale tworzy wirtualny interfejs sieciowy, przez który przechodzi cały ruc
     nano /etc/pve/lxc/<VMID>.conf
 ```
 Dopisać na końcu pliku:
-```
+```bash
     lxc.cgroup2.devices.allow: c 10:200 rwm
     lxc.mount.entry: /dev/net dev/net none bind,create=dir
 ```
 Zapisz i zrestartuj kontener
+
 ---
 
 ## Instalacja Tailscale
@@ -54,7 +55,7 @@ W Pi-hole dodajemy jedną opcje przy uruchamianiu Tailscale
     tailscale up --accept-dns=false
 ```
 > Flaga `--accept-dns=false` jest kluczowa. Zapobiega pętli DNS, w której Pi-hole mógłby próbować pytać samego siebie o zewnętrzne adresy.
-Dodaje jeszcze jeden katalog dla konfiguracji Pi-hole
+Dodaję jeszcze jeden katalog dla konfiguracji Pi-hole
 
 Następnie w panelu Tailscale
 - Zakładka **DNS**
@@ -75,6 +76,12 @@ Uruchamiamy kontener Pi-hole
 ```
 Panel konfiguracji Pi-hole powinien być już dostępny w przeglądarce pod adresem
 `http://<IP_KONTENERA>/admin`
+
+> [!NOTE]
+> Przy pierwszym uruchomieniu Pi-hole generuje losowe hasło do panelu. Odczytasz je z logów:
+> ```bash
+>     docker logs pihole 2>&1 | grep -i password
+> ```
 
 > [!IMPORTANT]
 > Jeżeli połączenie przez adres Tailscale nie działa należy ustawić `Listen on all interfaces, permit all` w zakładce `settings` -> `DNS`
