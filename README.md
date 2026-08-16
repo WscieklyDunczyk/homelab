@@ -3,6 +3,11 @@
 
 ![Proxmox](https://img.shields.io/badge/Hypervisor-Proxmox_VE-orange?style=for-the-badge&logo=proxmox&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-v2.0_Learning_Phase-blue?style=for-the-badge)
+![Docker](https://img.shields.io/badge/Konteneryzacja-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Tailscale](https://img.shields.io/badge/VPN-Tailscale-242424?style=for-the-badge&logo=tailscale&logoColor=white)
+![Debian](https://img.shields.io/badge/OS-Debian_12-A81D33?style=for-the-badge&logo=debian&logoColor=white)
+![Jellyfin](https://img.shields.io/badge/Media-Jellyfin-00A4DC?style=for-the-badge&logo=jellyfin&logoColor=white)
+![Pi-hole](https://img.shields.io/badge/DNS-Pi--hole-96060C?style=for-the-badge&logo=pihole&logoColor=white)
 
 Dokumentacja mojego domowego laboratorium opartego na dwóch niezależnych jednostkach PC. Projekt jest poligonem doświadczalnym dla technologii wirtualizacji, konteneryzacji oraz administracji systemami Windows/Linux.
 
