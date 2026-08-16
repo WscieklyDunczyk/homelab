@@ -67,7 +67,7 @@ Następnie w panelu Tailscale
 ```
 Przesyłam plik docker-compose.yml do kontenera LXC z naszego komputera 
 ```bash
-    scp docker-compose.yml <użytkownik_kontenera_LXC>@192.168.1.21:/opt/docker-compose/pihole/
+    scp docker-compose.yml <użytkownik_kontenera_LXC>@<IP_KONTENERA>:/opt/docker-compose/pihole/
 ```
 Uruchamiamy kontener Pi-hole
 ```bash

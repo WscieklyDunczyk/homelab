@@ -7,6 +7,7 @@
 Dokumentacja mojego domowego laboratorium opartego na dwóch niezależnych jednostkach PC. Projekt jest poligonem doświadczalnym dla technologii wirtualizacji, konteneryzacji oraz administracji systemami Windows/Linux.
 
 ---
+
 ## 📑 Spis treści
 
 - [🎯 Cel i geneza](#-cel-i-geneza)
