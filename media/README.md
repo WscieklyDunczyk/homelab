@@ -4,7 +4,7 @@ Jako że mam już swój gotowy dysk z mediami i gotową strukturą katalogów po
 
 Struktura katalogów
 
-```bash
+```
     /
     - movies
     - anime
@@ -89,8 +89,8 @@ Później w konsoli kontenera edytujemy zawartość pliku **.env**. Wpisujemy da
 ### Uruchomienie usług
 
 ```bash
-cd /opt/docker-compose/media
-docker compose up -d
+    cd /opt/docker-compose/media
+    docker compose up -d
 ```
 
 Po uruchomieniu usługi powinny być dostępne w przeglądarce pod adresem ip kontenera wraz z odpowiadającym portem dla danej usługi.

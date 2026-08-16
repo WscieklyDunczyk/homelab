@@ -3,8 +3,8 @@ Program typu otwarto źródłowego (Open-source) blokuje reklamy i telemetrię n
 
 ## 🚀 Konfiguracja
 
-## Przygotowanie kontenera LXC (wspólne dla każdego kontenera)
-Dla KAŻDEJ roli (pihole, media, monitoring) tworzę osobny kontener LXC i instaluje Dockera.
+### Przygotowanie kontenera LXC (wspólne dla każdego kontenera)
+Dla KAŻDEJ roli (pihole, media, monitoring) tworzę osobny kontener LXC i instaluję Dockera.
 - Kontener **CT**
 - Hostname `<rola>`
 - `unprivileged container` - ✓
@@ -13,27 +13,27 @@ Dla KAŻDEJ roli (pihole, media, monitoring) tworzę osobny kontener LXC i insta
 - Gateway: `192.168.1.1`
 > Po utworzeniu w właściwościach zaznaczamy jeszcze `Nesting` i `Keyctl` (wymagane do działania Docker)
 ---
-## Instalacja Dockera (w kontenerze)
+### Instalacja Dockera (w kontenerze)
 Prosta komenda
 ```bash
     curl -fsSL https://get.docker.com | sh
 ```
 > skrypt dodaje repozytorium, instaluje potrzebne pakiety, włącza usługę i ustawia automatyczne uruchamianie po restarcie systemu
-## Katalogi appdata
+### Katalogi appdata
 ```bash
     mkdir -p /opt/appdata/<usługa> /opt/docker-compose/<rola>
     chown -R 1000:1000 /opt/appdata /opt/docker-compose
     chmod -R 750 /opt/appdata /opt/docker-compose
 ```
 ---
-## Tailscale - TUN passthrough
+### Tailscale - TUN passthrough
 Tailscale tworzy wirtualny interfejs sieciowy, przez który przechodzi cały ruch WireGuard. Do stworzenia takiego interfejsu w Linuksie jest potrzebny kernelowy sterownik TUN. Kontener LXC to nie wirtualna maszyna nie ma jądra systemu, dzieli je z hostem Proxmox. Dostęp do urządzeń sprzętowych/kernelowych musi zostać nadany, nie jest automatycznie przydzielany wraz z utworzeniem kontenera LXC. Musimy zrobić to ręcznie w konsoli hosta(proxmox).
 
 ```bash
     nano /etc/pve/lxc/<VMID>.conf
 ```
 Dopisać na końcu pliku:
-```bash
+```
     lxc.cgroup2.devices.allow: c 10:200 rwm
     lxc.mount.entry: /dev/net dev/net none bind,create=dir
 ```
@@ -41,7 +41,7 @@ Zapisz i zrestartuj kontener
 
 ---
 
-## Instalacja Tailscale
+### Instalacja Tailscale
 ```bash
     curl -fsSL https://tailscale.com/install.sh | sh
     tailscale up --auth-key=<auth key z login.tailscale.com/admin/settings/keys> --hostname=<rola>
