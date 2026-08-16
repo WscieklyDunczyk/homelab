@@ -13,6 +13,12 @@ Dokumentacja mojego domowego laboratorium opartego na dwóch niezależnych jedno
 
 ---
 
+| | |
+|:---:|:---:|
+| [![Homepage](img/homepage.png)](img/homepage.png)<br>**Homepage** | [![PVE-Hel](img/hel_homepage.png)](img/hel_homepage.png)<br>**Proxmox (Hel)** |
+| [![Pi-hole](img/pihole_homepage.png)](img/pihole_homepage.png)<br>**Pi-hole** | [![Jellyfin](img/jellyfin_titlepage.png)](img/jellyfin_titlepage.png)<br>**Jellyfin** |
+| [![Sonarr](img/sonarr.png)](img/sonarr.png)<br>**Sonarr** | [![Uptime Kuma](img/uptime_kuma.png)](img/uptime_kuma.png)<br>**Uptime Kuma** |
+
 ## 📑 Spis treści
 
 - [🎯 Cel i geneza](#-cel-i-geneza)
@@ -72,11 +78,3 @@ Sieć domowa: `192.168.1.0/24`. Kontenery LXC  dostają statyczne adresy w kolej
 ## 🔗 Dostęp zdalny (Tailscale)
 
 Tailscale zainstalowany osobno w każdym LXC. Dostęp do nich mają tylko urządzenia znajdujące się w sieci Tailscale. Dzięki temu sieć domowa jest bezpieczna i nie potrzeba wystawiać żadnej usługi do internetu.
-
-
-# 🎞️ Zrzuty ekranu
-![Homepage](img/homepage.png)
-![PVE-Hel](img/hel_homepage.png)
-![Pi-hole](img/pihole_homepage.png)
-![Jellyfin](img/jellyfin_titlepage.png)
-![Sonarr](img/sonarr.png)
