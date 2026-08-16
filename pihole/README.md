@@ -46,7 +46,7 @@ Zapisz i zrestartuj kontener
     tailscale up --auth-key=<auth key z login.tailscale.com/admin/settings/keys> --hostname=<rola>
 ```
 > [!IMPORTANT]
-> Wyłącz wygasanie kluczy w panelu Tailscale **Key Expiry**`
+> Wyłącz wygasanie kluczy w panelu Tailscale **Key Expiry**
 
 ---
 W Pi-hole dodajemy jedną opcje przy uruchamianiu Tailscale
