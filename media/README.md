@@ -13,8 +13,8 @@ Każdy katalog zawiera odpowiadające mu media, a folder transmission jest katal
 - **Mount Point** → `Disk/directory` → `Path: /mnt/storage` (gdzie zostanie podpięty dysk w kontenerze)
 → **Add**. Kontener się zrestartuje automatycznie po dodaniu.
 > [!IMPORTANT]
-> Uwaga: jeśli dysk nie pojawia się na liście wyboru w tym oknie (GUI
-> zrób to przez **>_ Shell** hosta zamiast GUI:
+> Uwaga: jeśli dysk nie pojawia się na liście wyboru w tym oknie GUI
+> zrób to przez **>_ Shell** hosta:
 > ```bash
 > pct set 102 -mp0 /dev/sda1,mp=/mnt/storage
 > pct reboot 102
